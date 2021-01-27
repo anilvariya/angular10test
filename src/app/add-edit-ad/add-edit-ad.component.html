@@ -1,0 +1,44 @@
+<app-header [showBackButton]="true" [currentTitle]="navTitle" [showCreateButton]="false"></app-header>
+
+<form [formGroup]="adForm" autocomplete="off" novalidate (ngSubmit)="createAd(adForm.value)" 
+    fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <div>
+        <mat-form-field>
+            <input matInput type="text" placeholder="Ad title" formControlName="title" id="title">
+            <!-- <mat-hint layout-align="end">Not more then 15 characters long.</mat-hint> -->
+            <mat-error *ngIf="hasError('title', 'required')">Title is required</mat-error>
+            <mat-error *ngIf="hasError('title', 'maxlength')">Title can not have more than 15 characters</mat-error>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field>
+            <textarea matAutosizeMinRows=1 matAutosizeMaxRows=5 matInput type="text" placeholder="Ad description" formControlName="description" id="description"></textarea>
+            <!-- <mat-hint layout-align="end">Not more then 200 characters long.</mat-hint> -->
+            <mat-error *ngIf="hasError('description', 'required')">Description is required</mat-error>
+            <mat-error *ngIf="hasError('description', 'maxlength')">Description can not have more than 200 characters</mat-error>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field>
+            <mat-label>Category</mat-label>
+                <mat-select formControlName="category" id="category">
+                <mat-option value="cat1">Category 1</mat-option>
+                <mat-option value="cat2">Category 2</mat-option>
+                <mat-option value="cat3">Category 3</mat-option>
+                <mat-option value="cat4">Category 4</mat-option>
+                <mat-option value="cat5">Category 5</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field>
+            <input matInput type="number" min="0" step="5" placeholder="Ad price" formControlName="price" id="price">
+            <mat-error *ngIf="hasError('price', 'min')">Price must be atleast 5</mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="button-row">
+        <button mat-raised-button style="margin: 10px;" color="primary" class="button" type="submit">{{ isNewAd ? 'Submit' : 'Update'}}</button>
+        <button *ngIf="isNewAd" mat-raised-button class="button" (click)="resetAd()">Reset</button>
+    </div>
+</form>

@@ -1,0 +1,9 @@
+form {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.button-row {
+    display: table-cell;
+    width: 200px;
+}
